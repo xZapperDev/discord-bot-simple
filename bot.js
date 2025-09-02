@@ -32,8 +32,7 @@ client.on(Events.MessageCreate, message => {
 	}
 
 	// Admins commands - needs Administrator permission
-	if (message.member.permissions.has('Administrator')) {
-		if (command === 'clear') {
+		if (command === 'clear' && message.member.permissions.has('Administrator')) {
 			const amount = parseInt(args[0]) + 1;
 			if (isNaN(amount)) {
 				return message.reply('that doesn\'t seem to be a valid number.');
@@ -44,10 +43,6 @@ client.on(Events.MessageCreate, message => {
 				console.error(err);
 				message.channel.send('there was an error trying to prune messages in this channel!');
 			});
-		} else {
-			message.channel.send('You do not have permission to use this command.');
-		}
-	}
 });
 
 try {
