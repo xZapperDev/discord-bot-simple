@@ -1,0 +1,19 @@
+{
+  "name": "botoff",
+  "version": "1.0.0",
+  "main": "bot.js",
+  "scripts": {
+    "test": "nodemon bot.js"
+  },
+  "author": "xZapperDev",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "discord.js": "^14.22.1",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.1",
+    "nodemon": "^3.1.10"
+  }
+}
