@@ -24,7 +24,7 @@ client.on(Events.MessageCreate, message => {
 	}
 
 	if (command === 'help') {
-		message.channel.send(`Available commands:\n${prefix}clear - clean messages (need Administrator).\n${prefix}server - Provides server name\n${prefix}user-info - Provides your username and ID\n${prefix}help - Lists all commands`);
+		message.channel.send(`Available commands:\n\n${prefix}clear - clean messages (need Administrator).\n${prefix}server - Provides server name\n${prefix}user-info - Provides your username and ID\n${prefix}help - Lists all commands`);
 	} else if (command === 'user-info') {
 		message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
 	} else if (command === 'server') {
@@ -32,17 +32,19 @@ client.on(Events.MessageCreate, message => {
 	}
 
 	// Admins commands - needs Administrator permission
-		if (command === 'clear' && message.member.permissions.has('Administrator')) {
-			const amount = parseInt(args[0]) + 1;
-			if (isNaN(amount)) {
-				return message.reply('that doesn\'t seem to be a valid number.');
-			} else if (amount <= 1 || amount > 100) {
-				return message.reply('you need to input a number between 1 and 99.');
-			}
-			message.channel.bulkDelete(amount, true).catch(err => {
-				console.error(err);
-				message.channel.send('there was an error trying to prune messages in this channel!');
-			});
+
+	if (command === 'clear' && message.member.permissions.has('Administrator')) {
+		const amount = parseInt(args[0]) + 1;
+		if (isNaN(amount)) {
+			return message.reply('that doesn\'t seem to be a valid number.');
+		} else if (amount <= 1 || amount > 100) {
+			return message.reply('you need to input a number between 1 and 99.');
+		}
+		message.channel.bulkDelete(amount, true).catch(err => {
+			console.error(err);
+			message.channel.send('there was an error trying to prune messages in this channel!');
+		});
+	}
 });
 
 try {
